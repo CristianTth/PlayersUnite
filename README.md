@@ -5,7 +5,6 @@
 -clone the repo
 
 ### In terminal inside the project:
+npm install -g @angular/cli
 
--npm install -g @angular/cli
-
--ng serve - to run the server
+ng serve (to run the server)
