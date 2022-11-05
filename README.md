@@ -4,7 +4,7 @@
 
 -clone the repo
 
--in terminal inside the project:
+### In terminal inside the project:
 
 -npm install -g @angular/cli
 
