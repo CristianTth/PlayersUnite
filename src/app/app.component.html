@@ -1,0 +1,27 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img
+    width="150"
+    alt="Angular Logo"
+    src={{fullLogoPath}}
+  />
+  <div class="spacer"></div>
+</div>
+<div class="spacer"></div>
+<div class="row">
+  <div class="col-2">
+    <ul>
+        <li><a class="clickable" (click)="goToPage('')">Home</a></li>
+        <li><a class="clickable" (click)="goToPage('register')">Sign up</a></li>
+        <li><a class="clickable" (click)="goToPage('')">Profile</a></li>
+        <li><a class="clickable" (click)="goToPage('')">About</a></li>
+        <li><a class="clickable" (click)="goToPage('')">FAQ</a></li>
+        <li><a class="clickable" (click)="goToPage('')">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="col-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="content" role="main"></div>
