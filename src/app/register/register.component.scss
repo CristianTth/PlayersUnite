@@ -1,3 +1,7 @@
+form {
+    width: 200px;
+}
+
 .content {
     border-radius: 5px;
     background-color: #EDF2F4;
@@ -6,27 +10,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding:30px;
 }
 
 .input{
-    border-bottom:  1px solid #64C292;
     background:  transparent;
-    padding:  10px 30px 10px 30px;
-    margin-top: 20px;
+    padding:  6px 30px 6px 30px;
     color:  #333;
     border:0;
     outline: 0;
     border-bottom: 2px solid #9d9e9e;
 }
 
-.password-input{
-    @extend .input;
-    -webkit-text-security: disc;
+.button{
+    font-weight: 600;
+    border: 2px solid #1976d2;
+    background-color: #1976d2;
+    color: whitesmoke;
+    transition-duration: 0.2s;
 }
 
-.date-input{
-    @extend .input;
-    width: 230px;
+.validation{
+    margin: 0;
+    padding: 0;
+    color:red;
+}
+
+.button:hover{
+    border: 2px solid #fccb06;
+    background-color: #fccb06;
+}
+
+.submit{
+    @extend .button;
+    padding:  5px 15px 5px 15px;
+    border-radius: 2px;
+    margin-top: 20px;
+    outline: 0;
 }
 
 .login-form {
