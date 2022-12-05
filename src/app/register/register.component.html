@@ -1,12 +1,16 @@
 <div class="content">
     <h1>Register</h1>
-    <form>
-        <input id="username" class="input" type="text" placeholder="Username"><p class="validation" id="username-validation">&nbsp;</p>
-        <input id="email" class="input" type="email" placeholder="E-mail"><p class="validation" id="email-validation">&nbsp;</p>
-        <input id="password" class="input" [type]="show ? 'text' : 'password'" placeholder="Password"><p class="validation" id="password-validation">&nbsp;</p>
-        <input id="confirmPassword" class="input" [type]="show ? 'text' : 'password'" placeholder="Repeat password"><p class="validation" id="confirmPassword-validation">&nbsp;</p>
-        <input id="showPassword" type="checkbox" (click)="showPassword()" placeholder="Show Password">Show Password<br>
-        <input id="submit" class="submit" type="submit" value="Sign Up"><br>
-    </form>
+    <div class="form">
+        <input class="input" type="text" placeholder="Username" (input)="validateUsername()" [(ngModel)]="username">
+        <p class="validation">{{usernameMessage}}</p>
+        <input class="input" type="email" placeholder="E-mail" (input)="validateEmail()" [(ngModel)]="email">
+        <p class="validation">{{emailMessage}}</p>
+        <input class="input" [type]="show ? 'text' : 'password'" placeholder="Password" (input)="validatePasswords()" [(ngModel)]="password">
+        <p class="validation">{{passwordMessage}}</p>
+        <input class="input" [type]="show ? 'text' : 'password'" placeholder="Repeat password" (input)="validatePasswords()" [(ngModel)]="confirmPassword">
+        <p class="validation">{{confirmPasswordMessage}}</p>
+        <input type="checkbox" (click)="onShowPassword()" placeholder="Show Password">Show Password<br>
+        <button class="submit" #submit>Sign Up</button>
+    </div>
 </div>
 
