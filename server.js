@@ -30,3 +30,8 @@ var server = app.listen(process.env.PORT || 8080, function () {
 app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
+
+app.post('/api/ping', function (req, res) {
+  console.log(req.body);
+  res.send(req.body);
+})
