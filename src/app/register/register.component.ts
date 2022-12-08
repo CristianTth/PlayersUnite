@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatusService } from '../shared/status.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
   passwordMessage: string;
   confirmPasswordMessage: string;
 
-  constructor() {}
+  constructor(private statusService: StatusService) {}
 
   ngOnInit(): void {}
 
@@ -45,6 +46,10 @@ export class RegisterComponent implements OnInit {
     if (this.password != this.confirmPassword) {
       this.confirmPasswordMessage="Passwords do not match!";
     } else this.confirmPasswordMessage="";
+  }
+
+  onSubmit(username: string, email: string, password: string){
+    this.statusService.callServer(username, email, password);
   }
 
   onShowPassword() {

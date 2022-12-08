@@ -19,7 +19,6 @@ export class AppComponent {
         .then((result: any) => {
           this.status = result.status;
         });
-    this.statusService.callServer();
   }
 
   goToPage(pageName:string):void{

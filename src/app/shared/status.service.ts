@@ -15,12 +15,12 @@ export class StatusService {
                .catch(this.error);
   }
 
-  callServer() {
+  callServer(username: string, password: string, email: string) {
     const headers = new HttpHeaders()
           .set('Authorization', 'my-auth-token')
           .set('Content-Type', 'application/json');
 
-    this.http.post('/api/ping', JSON.stringify({requestName:"registerAccount", username:"Maria", password:"9324yg7q9whgt2108qhgf0921ui308uj2rfj0iqw"}), {
+    this.http.post('/api/ping', JSON.stringify({request:"registerAccount", username: username, password: password, email: email}), {
       headers: headers
     })
     .subscribe(data => {

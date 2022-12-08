@@ -10,7 +10,7 @@
         <input class="input" [type]="show ? 'text' : 'password'" placeholder="Repeat password" (input)="validatePasswords()" [(ngModel)]="confirmPassword">
         <p class="validation">{{confirmPasswordMessage}}</p>
         <input type="checkbox" (click)="onShowPassword()" placeholder="Show Password">Show Password<br>
-        <button class="submit" #submit>Sign Up</button>
+        <button class="submit" (click)="onSubmit(username, email, password)" #submit>Sign Up</button>
     </div>
 </div>
 
