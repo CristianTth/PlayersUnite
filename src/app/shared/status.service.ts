@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { response } from 'express';
 
 @Injectable({providedIn: 'root'})
 export class StatusService {
@@ -15,12 +14,12 @@ export class StatusService {
                .catch(this.error);
   }
 
-  callServer(username: string, password: string, email: string) {
+  callServer(username: string, email: string, password: string, confirmPassword: string) {
     const headers = new HttpHeaders()
           .set('Authorization', 'my-auth-token')
           .set('Content-Type', 'application/json');
 
-    this.http.post('/api/ping', JSON.stringify({request:"registerAccount", username: username, password: password, email: email}), {
+    this.http.post('/api/ping', JSON.stringify({request:"registerAccount", username: username, email: email, password: password, confirmPassword:confirmPassword}), {
       headers: headers
     })
     .subscribe(data => {

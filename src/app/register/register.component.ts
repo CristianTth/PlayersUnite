@@ -48,8 +48,9 @@ export class RegisterComponent implements OnInit {
     } else this.confirmPasswordMessage="";
   }
 
-  onSubmit(username: string, email: string, password: string){
-    this.statusService.callServer(username, email, password);
+  onSubmit(username: string, email: string, password: string, confirmPassword: string){
+    console.log("sent");
+    this.statusService.callServer(username, email, password, confirmPassword);
   }
 
   onShowPassword() {
