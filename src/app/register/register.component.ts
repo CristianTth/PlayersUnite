@@ -18,34 +18,62 @@ export class RegisterComponent implements OnInit {
   emailMessage: string;
   passwordMessage: string;
   confirmPasswordMessage: string;
+  isSubmitVisible: boolean = false;
+  checkedPassword: boolean = false;
+  checkedEmail: boolean = false;
+  checkedUsername: boolean = false;
 
   constructor(private statusService: StatusService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isSubmitVisible = false;
+  }
 
   validateUsername()
   {
+    this.checkedUsername = true;
     if (this.username.length < 4) {
       this.usernameMessage="Username is too short!";
+      this.checkedUsername = true;
     } else this.usernameMessage="";
+
+    if(this.checkedEmail && this.checkedPassword && this.checkedUsername)
+      this.isSubmitVisible = true;
+    else
+      this.isSubmitVisible = false;
   }
 
   validateEmail()
   {
+    this.checkedEmail = true;
     if (!this.emailRegEx.test(this.email)) {
       this.emailMessage="Email format incorect!";
+      this.checkedEmail = false;
     } else this.emailMessage="";
+
+    if(this.checkedEmail && this.checkedPassword && this.checkedUsername)
+      this.isSubmitVisible = true;
+    else
+      this.isSubmitVisible = false;
   }
 
   validatePasswords()
   {
+    this.checkedPassword = true;
     if (!this.passwordRegEx.test(this.password)) {
       this.passwordMessage="Password must contain at least one uppercase, lowercase and a number!";
+      this.checkedPassword = false;
     } else this.passwordMessage="";
 
     if (this.password != this.confirmPassword) {
       this.confirmPasswordMessage="Passwords do not match!";
+      this.checkedPassword = false;
     } else this.confirmPasswordMessage="";
+
+    if(this.checkedEmail && this.checkedPassword && this.checkedUsername)
+      this.isSubmitVisible = true;
+    else
+      this.isSubmitVisible = false;
   }
 
   onSubmit(username: string, email: string, password: string, confirmPassword: string){

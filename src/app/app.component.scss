@@ -128,7 +128,20 @@ li{
   cursor: pointer;
 }
 
+.toolbar .clickable
+{
+  @extend .clickable;
+  color:white;
+  margin: 20px;
+  white-space: nowrap;
+}
+
 .clickable:hover{
   font-weight: 600;
   color: #fccb06;
+}
+
+.toolbar .clickable:hover
+{
+  @extend .clickable;
 }
