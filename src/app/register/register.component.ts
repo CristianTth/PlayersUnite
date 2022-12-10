@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StatusService } from '../shared/status.service';
+import { ServerService } from '../shared/server.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -22,8 +23,9 @@ export class RegisterComponent implements OnInit {
   checkedPassword: boolean = false;
   checkedEmail: boolean = false;
   checkedUsername: boolean = false;
+  generalErrorMessage: string;
 
-  constructor(private statusService: StatusService) {}
+  constructor(private serverService: ServerService, private router: Router) {}
 
   ngOnInit(): void {
     this.isSubmitVisible = false;
@@ -76,9 +78,16 @@ export class RegisterComponent implements OnInit {
       this.isSubmitVisible = false;
   }
 
-  onSubmit(username: string, email: string, password: string, confirmPassword: string){
-    console.log("sent");
-    this.statusService.callServer(username, email, password, confirmPassword);
+  async onSubmit(username: string, email: string, password: string, confirmPassword: string){
+    let response: any;
+    await this.serverService.registerRequest(username, email, password, confirmPassword)
+    .then((result: any) => {
+      response = result.response;
+    });
+    if(response == "success")
+      this.router.navigate(['/login']);
+    else
+      this.generalErrorMessage = "Something went wrong, please try again";
   }
 
   onShowPassword() {

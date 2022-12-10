@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { StatusService } from './shared/status.service';
+import { Router } from '@angular/router';
+import { ServerService } from './shared/server.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +12,12 @@ export class AppComponent {
   title = 'PlayersUnite';
   status = 'DOWN';
 
-  constructor(private router:Router, private statusService: StatusService){}
+  constructor(private router:Router, private serverService: ServerService){}
 
   ngOnInit() {
-    this.statusService.getStatus()
+    this.serverService.getStatus()
         .then((result: any) => {
-          this.status = result.status;
+          this.status = result.response;
         });
-  }
-
-  goToPage(pageName:string):void{
-    this.router.navigate([`${pageName}`]);
-    console.log(this.status);
   }
 }

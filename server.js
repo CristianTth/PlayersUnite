@@ -67,15 +67,19 @@ app.post('/api/ping', function (req, res) {
           password: req.body.password
         }
         let collection = (client.db("playersUnite")).collection("accounts");
-        insertDB(collection, value).catch(console.dir);
-        res.send({ status: "success" });
+        //insertDB(collection, value).catch(console.dir);
+        res.send({ response: "success" });
       } catch (error) {
-        res.status(200).json({ status: "fail" });
+        res.status(200).json({ response: "fail" });
       }
+      break;
+    case 'loginAccount':
+      res.status(200).json({ response: "fail" });
       break;
     default:
       console.log("Unknown request");
       res.status(200).json({ response: "fail" });
+
   }
   else
     res.status(200).json({ response: "fail" });
