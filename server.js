@@ -32,6 +32,27 @@ async function insertDB(collection, value) {
     await client.close();
   }
 }
+
+async function checkAccount(collection, nameOrEmail, password)
+{
+  let ok = "fail";
+  let account = {"email":"", "username":""};
+  await collection.find({$or: [{username : nameOrEmail},{email : nameOrEmail}]})
+  .forEach( element =>
+    {
+      if(password == element.password)
+      {
+        ok = "success";
+        account = element;
+      }
+    }
+  );
+  return {
+    "status":ok,
+    "email":account.email,
+    "username":account.username
+  };
+}
 // Init the server
 var server = app.listen(process.env.PORT || 8080, function () {
     var port = server.address().port;
@@ -46,7 +67,7 @@ app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
 
-app.post('/api/ping', function (req, res) {
+app.post('/api/ping', async function (req, res) {
   if(typeof req.body.request == "string")
   switch (req.body.request)
   {
@@ -67,14 +88,19 @@ app.post('/api/ping', function (req, res) {
           password: req.body.password
         }
         let collection = (client.db("playersUnite")).collection("accounts");
-        //insertDB(collection, value).catch(console.dir);
+        insertDB(collection, value).catch(console.dir);
         res.send({ response: "success" });
       } catch (error) {
         res.status(200).json({ response: "fail" });
       }
       break;
     case 'loginAccount':
-      res.status(200).json({ response: "fail" });
+      let collection = (client.db("playersUnite")).collection("accounts");
+      let checkResponse = await checkAccount(collection, req.body.nameOrEmail, req.body.password);
+      if(checkResponse.status == "success")
+        res.status(200).json({ response: "success", email: checkResponse.email, username: checkResponse.username});
+      else
+        res.status(200).json({ response: "fail" });
       break;
     default:
       console.log("Unknown request");

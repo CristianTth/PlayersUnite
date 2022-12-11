@@ -8,15 +8,17 @@
     src={{fullLogoPath}}
   />
   <div class="spacer"></div>
-  <a routerLink="/login" class="clickable">Log in</a>
+  <a routerLink="/login" *ngIf="!loggedInStatus" class="clickable">Log in</a>
+  <a (click)="logOut()" *ngIf="loggedInStatus" class="clickable">Log out</a>
+  <p *ngIf="loggedInStatus">Hello {{ loggedUsername }}</p>
 </div>
 <div class="spacer"></div>
 <div class="row">
   <div class="col-2">
     <ul>
         <li><a routerLink="/home" class="clickable">Home</a></li>
-        <li><a routerLink="/register" class="clickable">Sign up</a></li>
-        <li><a routerLink="/profile" class="clickable">Profile</a></li>
+        <li><a routerLink="/register" *ngIf="!loggedInStatus" class="clickable">Sign up</a></li>
+        <li><a routerLink="/profile" *ngIf="loggedInStatus" class="clickable">Profile</a></li>
         <li><a routerLink="/about" class="clickable">About</a></li>
         <li><a routerLink="/faq" class="clickable">FAQ</a></li>
         <li><a routerLink="/contact" class="clickable">Contact</a></li>
@@ -24,7 +26,7 @@
   </div>
 
   <div class="col-9">
-    <router-outlet></router-outlet>
+    <router-outlet (logIn)="setLoggedIn($any($event))"></router-outlet>
   </div>
 </div>
 <div class="content" role="main"></div>

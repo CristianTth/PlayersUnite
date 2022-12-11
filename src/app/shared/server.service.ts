@@ -32,7 +32,7 @@ export class ServerService {
           .set('Content-Type', 'application/json');
 
     return firstValueFrom(this.http.post('/api/ping',
-                                         JSON.stringify({request:"loginAccount", username: nameOrEmail, password: password}),
+                                         JSON.stringify({request:"loginAccount", nameOrEmail: nameOrEmail, password: password}),
                                                         {headers: headers}))
     .then(response => response)
     .catch(this.error);
