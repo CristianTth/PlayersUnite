@@ -19,8 +19,8 @@ export class ServerService {
           .set('Authorization', 'my-auth-token')
           .set('Content-Type', 'application/json');
 
-    return firstValueFrom(this.http.post('/api/ping',
-                                         JSON.stringify({request:"registerAccount", username: username, email: email, password: password, confirmPassword:confirmPassword}),
+    return firstValueFrom(this.http.post('/api/register',
+                                         JSON.stringify({username: username, email: email, password: password, confirmPassword:confirmPassword}),
                                                         {headers: headers}))
     .then(response => response)
     .catch(this.error);
@@ -31,8 +31,8 @@ export class ServerService {
           .set('Authorization', 'my-auth-token')
           .set('Content-Type', 'application/json');
 
-    return firstValueFrom(this.http.post('/api/ping',
-                                         JSON.stringify({request:"loginAccount", nameOrEmail: nameOrEmail, password: password}),
+    return firstValueFrom(this.http.post('/api/login',
+                                         JSON.stringify({nameOrEmail: nameOrEmail, password: password}),
                                                         {headers: headers}))
     .then(response => response)
     .catch(this.error);

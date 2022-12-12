@@ -67,46 +67,35 @@ app.get("/api/status", function (req, res) {
     res.status(200).json({ status: "UP" });
 });
 
-app.post('/api/ping', async function (req, res) {
-  if(typeof req.body.request == "string")
-  switch (req.body.request)
-  {
-    case 'registerAccount':
-      try {
-        if(req.body.username.length < 4)
-          throw "Error!";
-        else if(!emailRegEx.test(req.body.email))
-          throw "Error!";
-        else if(req.body.password!=req.body.confirmPassword)
-          throw "Error!";
-        else if(!passwordRegEx.test(req.body.password))
-          throw "Error!";
-
-        let value = {
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password
-        }
-        let collection = (client.db("playersUnite")).collection("accounts");
-        insertDB(collection, value).catch(console.dir);
-        res.send({ response: "success" });
-      } catch (error) {
-        res.status(200).json({ response: "fail" });
-      }
-      break;
-    case 'loginAccount':
-      let collection = (client.db("playersUnite")).collection("accounts");
-      let checkResponse = await checkAccount(collection, req.body.nameOrEmail, req.body.password);
-      if(checkResponse.status == "success")
-        res.status(200).json({ response: "success", email: checkResponse.email, username: checkResponse.username});
-      else
-        res.status(200).json({ response: "fail" });
-      break;
-    default:
-      console.log("Unknown request");
-      res.status(200).json({ response: "fail" });
-
-  }
+app.post('/api/login', async function (req, res) {
+  let collection = (client.db("playersUnite")).collection("accounts");
+  let checkResponse = await checkAccount(collection, req.body.nameOrEmail, req.body.password);
+  if(checkResponse.status == "success")
+    res.status(200).json({ response: "success", email: checkResponse.email, username: checkResponse.username});
   else
     res.status(200).json({ response: "fail" });
+})
+
+app.post('/api/register', async function (req, res) {
+  try {
+    if(req.body.username.length < 4)
+      throw "Error!";
+    else if(!emailRegEx.test(req.body.email))
+      throw "Error!";
+    else if(req.body.password!=req.body.confirmPassword)
+      throw "Error!";
+    else if(!passwordRegEx.test(req.body.password))
+      throw "Error!";
+
+    let value = {
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    }
+    let collection = (client.db("playersUnite")).collection("accounts");
+    insertDB(collection, value).catch(console.dir);
+    res.send({ response: "success" });
+  } catch (error) {
+    res.status(200).json({ response: "fail" });
+  }
 })

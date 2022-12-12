@@ -13,12 +13,15 @@ export class AppComponent implements OnDestroy{
   loggedInStatus = localStorage.getItem('loggedIn') || false;
   loggedUsername = "";
   fullLogoPath = "/assets/images/full-logo.png"
+  defaultProfile = "/assets/images/default-profile.png"
   title = 'PlayersUnite';
   status = 'DOWN';
+  accountDropdown = false;
   onDatePickedSub: Subscription;
   constructor(private router:Router, private serverService: ServerService, private childToParentService: ChildToParentService){
-    this.onDatePickedSub = this.childToParentService.deliver$.subscribe(($event: string | boolean) => {
-      this.setLoggedIn($event);
+    this.onDatePickedSub = this.childToParentService.deliver$.subscribe(($event: string) => {
+      this.setLoggedIn(true);
+      this.loggedUsername = $event;
     });
   }
 
@@ -52,5 +55,13 @@ export class AppComponent implements OnDestroy{
     this.loggedInStatus = $event;
     localStorage.setItem('loggedIn', String($event));
     this.loggedUsername = String(localStorage.getItem('username'));
+  }
+
+  showDropDown(){
+    this.accountDropdown = true;
+  }
+
+  hideDropDown(){
+    this.accountDropdown = false;
   }
 }

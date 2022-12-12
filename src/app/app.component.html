@@ -9,8 +9,14 @@
   />
   <div class="spacer"></div>
   <a routerLink="/login" *ngIf="!loggedInStatus" class="clickable">Log in</a>
-  <a (click)="logOut()" *ngIf="loggedInStatus" class="clickable">Log out</a>
-  <p *ngIf="loggedInStatus">Hello {{ loggedUsername }}</p>
+  <div class="accountButton" (mouseover)="showDropDown()" (mouseleave)="hideDropDown()" *ngIf="loggedInStatus">
+    <p>{{ loggedUsername }}</p>
+    <img class="profile-pic" src="{{ defaultProfile }}" alt="default profile pic">
+    <div class="dropdown-content" (mouseover)="showDropDown()" (mouseleave)="hideDropDown()" *ngIf="accountDropdown">
+      <a href="/profile">Profile</a>
+      <a (click)="logOut()">Log out</a>
+    </div>
+  </div>
 </div>
 <div class="spacer"></div>
 <div class="row">

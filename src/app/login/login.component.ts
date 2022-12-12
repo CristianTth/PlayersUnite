@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     });
     if(response == "success")
     {
-      this.childToParentService.deliver$.next(true);
+      this.childToParentService.deliver$.next(username);
       localStorage.setItem('username', username);
       localStorage.setItem('email', email);
       this.router.navigate(['/home']);
