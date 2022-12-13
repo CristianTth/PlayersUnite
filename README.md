@@ -9,4 +9,8 @@ npm install
 
 npm install -g @angular/cli
 
-ng serve (to run the server)
+npm install mongodb
+
+ng start (to run the angular server)
+
+node server.js (to run the node server)
