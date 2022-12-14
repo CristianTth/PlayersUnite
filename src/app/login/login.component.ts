@@ -20,12 +20,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async onSubmit(nameOrEmail: string, password: string)
+  async onSubmit()
   {
     let response: any;
     let username: string = "";
     let email: string = "";
-    await this.serverService.loginRequest(nameOrEmail, password)
+    await this.serverService.loginRequest(this.nameOrEmail, this.password)
     .then((result: any) => {
       response = result.response;
       username = result.username;

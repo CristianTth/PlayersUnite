@@ -13,7 +13,7 @@
     <p>{{ loggedUsername }}</p>
     <img class="profile-pic" src="{{ defaultProfile }}" alt="default profile pic">
     <div class="dropdown-content" (mouseover)="showDropDown()" (mouseleave)="hideDropDown()" *ngIf="accountDropdown">
-      <a href="/profile">Profile</a>
+      <a routerLink="/profile">Profile</a>
       <a (click)="logOut()">Log out</a>
     </div>
   </div>
@@ -35,4 +35,5 @@
     <router-outlet (logIn)="setLoggedIn($any($event))"></router-outlet>
   </div>
 </div>
+<div class="footer">All rights reserved by ©PlayersUnite 2022</div>
 <div class="content" role="main"></div>

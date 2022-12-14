@@ -11,7 +11,7 @@
         <p class="validation">{{confirmPasswordMessage}}</p>
         <input type="checkbox" (click)="onShowPassword()" placeholder="Show Password">Show Password<br>
         <p class="validation">{{generalErrorMessage}}</p>
-        <button class="submit" *ngIf="this.isSubmitVisible" (click)="onSubmit(username, email, password, confirmPassword)" #submit>Sign Up</button>
+        <button class="submit" *ngIf="this.isSubmitVisible" (click)="onSubmit()" #submit>Sign Up</button>
     </div>
 </div>
 

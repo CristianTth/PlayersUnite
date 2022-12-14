@@ -24,13 +24,9 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 async function insertDB(collection, value) {
-  try {
-    // create a document to insert
+    // create a document to insert`
     const result = await collection.insertOne(value);
     console.log(`A document was inserted with the _id: ${result.insertedId}`);
-  } finally {
-    await client.close();
-  }
 }
 
 async function checkAccount(collection, nameOrEmail, password)
@@ -76,6 +72,14 @@ app.post('/api/login', async function (req, res) {
     res.status(200).json({ response: "fail" });
 })
 
+app.get('/api/lobbies', async function (req, res) {
+  let collection = (client.db("playersUnite")).collection("lobbies");
+
+  lobbies = [];
+  await collection.find().forEach(element => lobbies.push(element));
+  res.status(200).json({ respons: "success", lobbies:lobbies});
+})
+
 app.post('/api/register', async function (req, res) {
   try {
     if(req.body.username.length < 4)
@@ -93,6 +97,30 @@ app.post('/api/register', async function (req, res) {
       password: req.body.password
     }
     let collection = (client.db("playersUnite")).collection("accounts");
+    insertDB(collection, value).catch(console.dir);
+    res.send({ response: "success" });
+  } catch (error) {
+    res.status(200).json({ response: "fail" });
+  }
+})
+
+app.post('/api/lobby', async function (req, res) {
+  try {
+    if(req.body.game.length < 2)
+      throw "Error!";
+    else if(req.body.size < 2)
+      throw "Error!";
+    else if(req.body.description.length < 7)
+      throw "Error!";
+
+    let value = {
+      game: req.body.game,
+      description: req.body.description,
+      participants: [req.body.admin],
+      admin: req.body.admin,
+      party_size: req.body.size
+    }
+    let collection = (client.db("playersUnite")).collection("lobbies");
     insertDB(collection, value).catch(console.dir);
     res.send({ response: "success" });
   } catch (error) {

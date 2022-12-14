@@ -1,3 +1,10 @@
 <div class="content">
     <h1>Home</h1>
+    <div class="create" routerLink="/newlobby">Create lobby</div>
+    <div class="lobby" *ngFor="let lobby of lobbies">
+        <p class="title">{{ lobby.game }}     ---    {{ lobby.admin }}</p>
+        <p class="capacity"> players {{ lobby.participants.length }}/{{ lobby.party_size }}</p>
+        <div class="description">{{ lobby.description }}</div>
+        <div routerLink="/lobby" class="button">Join</div>
+    </div>
 </div>

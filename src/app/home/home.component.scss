@@ -12,3 +12,69 @@
     align-items: center;
     padding:30px;
 }
+
+.lobby {
+    color:whitesmoke;
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #1976d2;
+    border-radius: 20px;
+}
+
+.title {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 10px;
+}
+
+.title:hover
+{
+    color: #fccb06;
+    cursor: pointer;
+}
+
+.capacity {
+    @extend .title;
+    float: right;
+}
+
+.description{
+    margin:10px;
+}
+
+.button{
+    float:right;
+    font-weight: 600;
+    border: 2px solid #1976d2;
+    background-color: #1976d2;
+    color: whitesmoke;
+    transition-duration: 0.2s;
+    border-radius: 15px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.button:hover{
+    border: 2px solid #fccb06;
+    background-color: #fccb06;
+}
+
+.create{
+    float:right;
+    font-weight: 600;
+    color: #1976d2;
+    transition-duration: 0.2s;
+    border-radius: 15px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.create:hover{
+    color: #fccb06;
+}

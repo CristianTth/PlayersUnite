@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     this.checkedUsername = true;
     if (this.username.length < 4) {
       this.usernameMessage="Username is too short!";
-      this.checkedUsername = true;
+      this.checkedUsername = false;
     } else this.usernameMessage="";
 
     if(this.checkedEmail && this.checkedPassword && this.checkedUsername)
@@ -78,9 +78,9 @@ export class RegisterComponent implements OnInit {
       this.isSubmitVisible = false;
   }
 
-  async onSubmit(username: string, email: string, password: string, confirmPassword: string){
+  async onSubmit(){
     let response: any;
-    await this.serverService.registerRequest(username, email, password, confirmPassword)
+    await this.serverService.registerRequest(this.username, this.email, this.password, this.confirmPassword)
     .then((result: any) => {
       response = result.response;
     });
