@@ -5,8 +5,8 @@ var express = require("express");
 // Use body-parser
 var bodyParser = require("body-parser");
 //mongodb
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://PlayersUnite:3MTIii3NH99HxT2B@serverlessinstance0.d9v2d.mongodb.net/?retryWrites=true&w=majority";
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const uri = "mongodb+srv://PlayersUnite:qv2dldvyznKTklej@serverlessinstance0.d9v2d.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
 // Create new instance of the express server
@@ -123,6 +123,27 @@ app.post('/api/lobby', async function (req, res) {
     let collection = (client.db("playersUnite")).collection("lobbies");
     insertDB(collection, value).catch(console.dir);
     res.send({ response: "success" });
+  } catch (error) {
+    res.status(200).json({ response: "fail" });
+  }
+})
+
+app.get('/api/lobbies', async function (req, res) {
+  let collection = (client.db("playersUnite")).collection("lobbies");
+
+  lobbies = [];
+  await collection.find().forEach(element => lobbies.push(element));
+  res.status(200).json({ respons: "success", lobbies:lobbies});
+})
+
+app.post('/api/lobbyget', async function (req, res) {
+  try {
+    if(!req.body.lobbyID)
+      throw "Error!";
+
+    let collection = (client.db("playersUnite")).collection("lobbies");
+    lobby = await collection.findOne({ _id: ObjectId(req.body.lobbyID) });
+    res.send({ response: "success", lobby:lobby});
   } catch (error) {
     res.status(200).json({ response: "fail" });
   }

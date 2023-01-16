@@ -61,6 +61,20 @@ export class ServerService {
     .catch(this.error);
   }
 
+  lobbyGetRequest(lobbyID: string|null)
+  {
+    console.log(lobbyID)
+    const headers = new HttpHeaders()
+          .set('Authorization', 'my-auth-token')
+          .set('Content-Type', 'application/json');
+
+    return firstValueFrom(this.http.post('/api/lobbyget',
+                                         JSON.stringify({lobbyID: lobbyID}),
+                                                        {headers: headers}))
+    .then(response => response)
+    .catch(this.error);
+  }
+
   // Error handling
   private error (error: any) {
     let message = (error.message) ? error.message :

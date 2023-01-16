@@ -9,6 +9,7 @@ import { ContactComponent } from '../app/contact/contact.component'
 import { ProfileComponent } from '../app/profile/profile.component'
 import { LobbyComponent } from './lobby/lobby.component';
 import { NewLobbyComponent } from './newlobby/newlobby.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path:'register', component: RegisterComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path:'contact', component: ContactComponent},
   {path:'profile', component: ProfileComponent},
   {path:'lobby', component: LobbyComponent},
-  {path:'newlobby', component: NewLobbyComponent}
+  {path:'newlobby', component: NewLobbyComponent},
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

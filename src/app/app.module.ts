@@ -14,6 +14,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { NewLobbyComponent } from './newlobby/newlobby.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewLobbyComponent } from './newlobby/newlobby.component';
     ContactComponent,
     HomeComponent,
     LobbyComponent,
-    NewLobbyComponent
+    NewLobbyComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

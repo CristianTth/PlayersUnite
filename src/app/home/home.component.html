@@ -5,6 +5,6 @@
         <p class="title">{{ lobby.game }}     ---    {{ lobby.admin }}</p>
         <p class="capacity"> players {{ lobby.participants.length }}/{{ lobby.party_size }}</p>
         <div class="description">{{ lobby.description }}</div>
-        <div routerLink="/lobby" class="button">Join</div>
+        <div routerLink="/lobby" [queryParams]="{ lobbyID: lobby._id}" class="button">Join</div>
     </div>
 </div>
