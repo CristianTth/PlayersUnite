@@ -104,10 +104,39 @@ app.post('/api/register', async function (req, res) {
   }
 })
 
+app.post('/api/addplayer', async function (req, res) {
+  try {
+    if(!req.body.username)
+    throw "Error!";
+    console.log("lol");
+    let collection = (client.db("playersUnite")).collection("lobbies");
+    lobby = await collection.findOne({ _id: ObjectId(req.body.lobbyID) });
+    console.log(lobby.participants);
+    if( !lobby.participants.includes(req.body.username) )
+      await collection.updateOne({ _id: ObjectId(req.body.lobbyID) }, { $push: { participants: req.body.username }});
+    res.send({ response: "success" });
+  } catch (error) {
+    res.status(200).json({ response: "fail" });
+  }
+})
+
+app.post('/api/lobbyget', async function (req, res) {
+  try {
+    if(!req.body.lobbyID)
+      throw "Error!";
+
+    let collection = (client.db("playersUnite")).collection("lobbies");
+    lobby = await collection.findOne({ _id: ObjectId(req.body.lobbyID) });
+    res.send({ response: "success", lobby:lobby});
+  } catch (error) {
+    res.status(200).json({ response: "fail" });
+  }
+})
+
 app.post('/api/lobby', async function (req, res) {
   try {
     if(req.body.game.length < 2)
-      throw "Error!";
+    throw "Error!";
     else if(req.body.size < 2)
       throw "Error!";
     else if(req.body.description.length < 7)
@@ -136,15 +165,3 @@ app.get('/api/lobbies', async function (req, res) {
   res.status(200).json({ respons: "success", lobbies:lobbies});
 })
 
-app.post('/api/lobbyget', async function (req, res) {
-  try {
-    if(!req.body.lobbyID)
-      throw "Error!";
-
-    let collection = (client.db("playersUnite")).collection("lobbies");
-    lobby = await collection.findOne({ _id: ObjectId(req.body.lobbyID) });
-    res.send({ response: "success", lobby:lobby});
-  } catch (error) {
-    res.status(200).json({ response: "fail" });
-  }
-})

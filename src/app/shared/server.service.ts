@@ -75,6 +75,19 @@ export class ServerService {
     .catch(this.error);
   }
 
+  addPlayer(username: string|null, lobbyID: string|null)
+  {
+    const headers = new HttpHeaders()
+          .set('Authorization', 'my-auth-token')
+          .set('Content-Type', 'application/json');
+
+    return firstValueFrom(this.http.post('/api/addplayer',
+                                         JSON.stringify({username: username, lobbyID: lobbyID}),
+                                                        {headers: headers}))
+    .then(response => response)
+    .catch(this.error);
+  }
+
   // Error handling
   private error (error: any) {
     let message = (error.message) ? error.message :

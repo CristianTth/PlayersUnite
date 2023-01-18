@@ -1,1 +1,10 @@
-<p *ngIf="lobby">Showing lobby for {{ lobbyID }} which is called {{ lobby.game }}</p>
+<div *ngIf="lobby">
+    <div class="game">{{ lobby.game }}</div>
+    <div class="size">{{ lobby.participants.length}}/{{lobby.party_size }}</div>
+    <div class="container" *ngFor="let participant of lobby.participants">
+      {{ participant }}
+    <div class="admin" *ngIf="lobby.admin == participant">
+      ADMIN
+    </div>
+    </div>
+</div>
